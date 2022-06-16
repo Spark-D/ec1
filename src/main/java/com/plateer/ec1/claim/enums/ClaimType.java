@@ -17,14 +17,14 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 @Getter
 public enum ClaimType {
-    GCC(CompleteProcessor::getInstance, ()-> new GeneralCancelDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
-    MCA(AcceptWithdrawalProcessor::getInstance, ()-> new EcouponCancelAcceptDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
-    MCC(CompleteProcessor::getInstance, ()-> new EcouponCancelCompleteDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.FALSE, ""),
-    RA(CompleteProcessor::getInstance, ()-> new GeneralCancelDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
-    RC(CompleteProcessor::getInstance, ()-> new GeneralCancelDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.FALSE, ""),
-    RW(CompleteProcessor::getInstance, ()-> new GeneralCancelDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
-    XA(CompleteProcessor::getInstance, ()-> new GeneralCancelDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
-    XW(CompleteProcessor::getInstance, ()-> new GeneralCancelDataCreator(), Arrays.asList(), Arrays.asList(), Boolean.TRUE, "");
+    GCC(CompleteProcessor::getInstance,         GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
+    MCA(AcceptWithdrawalProcessor::getInstance, EcouponCancelAcceptDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
+    MCC(CompleteProcessor::getInstance,         EcouponCancelCompleteDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.FALSE, ""),
+    RA(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
+    RC(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.FALSE, ""),
+    RW(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
+    XA(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, ""),
+    XW(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "");
 
     private final Supplier<ClaimProcessor> claimProcess;
     private final Supplier<ClaimDataCreator> creator;
