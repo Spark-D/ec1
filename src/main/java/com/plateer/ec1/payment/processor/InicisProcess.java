@@ -11,6 +11,7 @@ public class InicisProcess implements PayProcess{
 
     @Override
     public ApproveResVo approvePay(PayInfo payInfo) {
+        System.out.println("inicis");
         return null;
     }
 

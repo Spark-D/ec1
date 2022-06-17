@@ -11,6 +11,7 @@ public class PointProcess implements PayProcess{
 
     @Override
     public ApproveResVo approvePay(PayInfo payInfo) {
+        System.out.println("point");
         return null;
     }
 
