@@ -14,7 +14,7 @@ public class PromotionService {
     private final CalculatorFactory calculatorFactory;
 
     public PriceDcResVo getApplyDiscountPrice(PriceDiscountReqVo discountReqVo) {
-        calculatorFactory.getCalculator(discountReqVo.getPromotionType().name())
+        calculatorFactory.getCalculator(discountReqVo.getPromotionType().name());
         return null;
     }
 

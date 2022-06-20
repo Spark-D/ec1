@@ -12,7 +12,7 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping
+    @PostMapping("pay")
     public void approvePay(PayInfo payInfo) {
         paymentService.approve(payInfo);
     }
