@@ -3,6 +3,8 @@ package com.plateer.ec1.claim.controller;
 import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.service.ClaimService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +16,9 @@ public class ClaimController {
     private final ClaimService claimService;
 
     @PostMapping("claim")
-    public void claim(@RequestBody ClaimDto claimDto) {
+    public ResponseEntity<String> claim(@RequestBody ClaimDto claimDto) {
         claimService.claim(claimDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

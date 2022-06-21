@@ -4,6 +4,9 @@ import com.plateer.ec1.claim.creator.ClaimDataCreator;
 import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.dto.ClaimProcessDto;
 import com.plateer.ec1.claim.enums.ClaimType;
+import com.plateer.ec1.claim.enums.ProcessorType;
+import com.plateer.ec1.claim.factory.CreatorFactory;
+import com.plateer.ec1.claim.factory.ValidatorFactory;
 import com.plateer.ec1.claim.util.MonitoringLogHelper;
 import com.plateer.ec1.claim.validator.ClaimValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -15,26 +18,18 @@ import javax.annotation.PostConstruct;
 @Slf4j
 public class AcceptWithdrawalProcessor extends ClaimProcessor {
 
-    private static AcceptWithdrawalProcessor acceptWithdrawalProcessor;
-
-    public AcceptWithdrawalProcessor(ClaimValidator claimValidator, MonitoringLogHelper monitoringLogHelper) {
-
-        super(claimValidator, monitoringLogHelper);
+    public AcceptWithdrawalProcessor(MonitoringLogHelper monitoringLogHelper, CreatorFactory creatorFactory, ValidatorFactory validatorFactory) {
+        super(monitoringLogHelper, creatorFactory, validatorFactory);
     }
 
-    @PostConstruct
-    private void initialize() {
-        acceptWithdrawalProcessor = this;
-    }
-
-    public static AcceptWithdrawalProcessor getInstance() {
-
-        return acceptWithdrawalProcessor;
+    @Override
+    public ProcessorType getType() {
+        return ProcessorType.ACCEPT_WITHDRAWAL;
     }
 
     @Override
     public void doProcess(ClaimDto dto) {
-        ClaimDataCreator claimDataCreator = ClaimType.findCreator(dto.getClaimType().name());
+        ClaimDataCreator claimDataCreator = getCreator(dto);
         Long logKey = null;
         ClaimProcessDto createDataTarget = null;
         ClaimProcessDto updateDataTarget = null;
@@ -42,7 +37,7 @@ public class AcceptWithdrawalProcessor extends ClaimProcessor {
         try{
             claimDataCreator.getClamNo(dto);
             logKey = insertLog(dto);
-            validate(dto);
+            getValidator(dto).validate(dto);
             createDataTarget = claimDataCreator.makeCreateData(dto);
             updateDataTarget = claimDataCreator.makeUpdateData(dto);
             claimDataCreator.saveClaimData(createDataTarget, updateDataTarget);

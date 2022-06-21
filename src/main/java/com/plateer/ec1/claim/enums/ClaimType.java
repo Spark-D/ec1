@@ -1,52 +1,36 @@
 package com.plateer.ec1.claim.enums;
 
-import com.plateer.ec1.claim.creator.ClaimDataCreator;
-import com.plateer.ec1.claim.creator.EcouponCancelAcceptDataCreator;
-import com.plateer.ec1.claim.creator.EcouponCancelCompleteDataCreator;
-import com.plateer.ec1.claim.creator.GeneralCancelDataCreator;
-import com.plateer.ec1.claim.processor.AcceptWithdrawalProcessor;
+import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.processor.ClaimProcessor;
-import com.plateer.ec1.claim.processor.CompleteProcessor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Proc;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 @RequiredArgsConstructor
 @Getter
 public enum ClaimType {
-    GCC(CompleteProcessor::getInstance,         GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "C"),
-    MCA(AcceptWithdrawalProcessor::getInstance, EcouponCancelAcceptDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "C"),
-    MCC(CompleteProcessor::getInstance,         EcouponCancelCompleteDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.FALSE, "C"),
-    RA(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "R"),
-    RC(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.FALSE, "R"),
-    RW(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "RC"),
-    XA(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "X"),
-    XW(CompleteProcessor::getInstance,          GeneralCancelDataCreator::new, Arrays.asList(), Arrays.asList(), Boolean.TRUE, "XC");
+    GCC(ProcessorType.COMPLETE, Arrays.asList("10","20"), Arrays.asList("10"), Boolean.TRUE, "C", ValidatorType.CANCEL),
+    MCA(ProcessorType.ACCEPT_WITHDRAWAL, Arrays.asList("20"), Arrays.asList("20"), Boolean.TRUE, "C", ValidatorType.CANCEL),
+    RA(ProcessorType.ACCEPT_WITHDRAWAL, Arrays.asList("50"), Arrays.asList("10","20"), Boolean.TRUE, "R", ValidatorType.RETURN_EXCHANGE),
+    RW(ProcessorType.COMPLETE, Arrays.asList("60"), Arrays.asList("10","20"), Boolean.FALSE, "RC",ValidatorType.RETURN_EXCHANGE),
+    XA(ProcessorType.ACCEPT_WITHDRAWAL, Arrays.asList("50"), Arrays.asList("10","20"), Boolean.TRUE, "X",ValidatorType.WITHDRAWAL);
 
-    private final Supplier<ClaimProcessor> claimProcess;
-    private final Supplier<ClaimDataCreator> creator;
+
+    private final ProcessorType processorType;
     private final List<String> validStatuses; // 주문진행상태코드
-    private final List<String> productTypes; // 상품유형 -> 모바일/일반
+    private final List<String> productTypes; // 상품유형 :모바일/일반
     private final Boolean claimNoFlag; // 클레임번호 채번
     private final String claimCode; //주문클레임구분코드
+    private final ValidatorType validatorType;
 
-    public static ClaimDataCreator findCreator(String name) {
+    public static ClaimType findClaimTypeByDto(String climTypeCode, String productTypeCode){
         return Arrays.stream(ClaimType.values())
-                .filter(type -> type.name().equals(name))
+                .filter(t -> t.getClaimCode().equals(climTypeCode) && t.getProductTypes().contains(productTypeCode))
                 .findFirst()
-                .map(claimType -> claimType.getCreator().get())
-                .orElseThrow(()-> new IllegalArgumentException("클레임유형 요청이 잘못되었습니다."));
-    }
-
-    public static ClaimProcessor findProcessor(String name) {
-        return Arrays.stream(ClaimType.values())
-                .filter(type -> type.name().equals(name))
-                .findFirst()
-                .map(claimType -> claimType.getClaimProcess().get())
-                .orElseThrow(()-> new IllegalArgumentException("클레임유형 요청이 잘못되었습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(""));
     }
 
 }

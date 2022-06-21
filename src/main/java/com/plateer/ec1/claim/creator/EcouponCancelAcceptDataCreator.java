@@ -1,15 +1,22 @@
 package com.plateer.ec1.claim.creator;
 
 import com.plateer.ec1.claim.dto.ClaimDto;
+import com.plateer.ec1.claim.enums.ClaimType;
 import com.plateer.ec1.claim.model.OrderBenefit;
 import com.plateer.ec1.claim.model.OrderBenefitRelation;
 import com.plateer.ec1.claim.model.OrderClaim;
 import com.plateer.ec1.claim.model.OrderCost;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class EcouponCancelAcceptDataCreator extends ClaimDataCreator{
+    @Override
+    public ClaimType getType() {
+        return ClaimType.MCA;
+    }
+
     @Override
     protected List<OrderClaim> makeInsertOrderClaim(ClaimDto dto) {
         System.out.println("이쿠폰 취소접수 클레임데이터 만든다");

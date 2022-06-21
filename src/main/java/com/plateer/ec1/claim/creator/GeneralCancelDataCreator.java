@@ -1,15 +1,22 @@
 package com.plateer.ec1.claim.creator;
 
 import com.plateer.ec1.claim.dto.ClaimDto;
+import com.plateer.ec1.claim.enums.ClaimType;
 import com.plateer.ec1.claim.model.OrderBenefit;
 import com.plateer.ec1.claim.model.OrderBenefitRelation;
 import com.plateer.ec1.claim.model.OrderClaim;
 import com.plateer.ec1.claim.model.OrderCost;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class GeneralCancelDataCreator extends ClaimDataCreator{
+
+    @Override
+    public ClaimType getType() {
+        return ClaimType.GCC;
+    }
 
     @Override
     protected List<OrderClaim> makeInsertOrderClaim(ClaimDto dto) {

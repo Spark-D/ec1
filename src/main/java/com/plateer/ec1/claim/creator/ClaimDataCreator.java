@@ -2,6 +2,7 @@ package com.plateer.ec1.claim.creator;
 
 import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.dto.ClaimProcessDto;
+import com.plateer.ec1.claim.enums.ClaimType;
 import com.plateer.ec1.claim.model.OrderBenefit;
 import com.plateer.ec1.claim.model.OrderBenefitRelation;
 import com.plateer.ec1.claim.model.OrderClaim;
@@ -10,6 +11,8 @@ import com.plateer.ec1.claim.model.OrderCost;
 import java.util.List;
 
 abstract public class ClaimDataCreator {
+
+    abstract public ClaimType getType();
 
     public void getClamNo(ClaimDto dto) {
         System.out.println("클레임번호 채번");

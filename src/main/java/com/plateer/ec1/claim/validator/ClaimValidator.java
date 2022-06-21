@@ -1,11 +1,13 @@
 package com.plateer.ec1.claim.validator;
 
 import com.plateer.ec1.claim.dto.ClaimDto;
-import org.springframework.stereotype.Component;
+import com.plateer.ec1.claim.enums.ValidatorType;
 
-@Component
-public class ClaimValidator {
+abstract public class ClaimValidator {
+
+    public abstract ValidatorType getType();
+
     public void validate(ClaimDto dto) throws Exception {
-        System.out.println("validate");
+        System.out.println("common validate");
     };
 }
