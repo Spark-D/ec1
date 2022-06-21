@@ -36,4 +36,8 @@ abstract public class ClaimProcessor {
     }
     public abstract void doProcess(ClaimDto dto);
 
+    protected void verifyAmount() {
+        System.out.println("클레임 공통 금액검증");
+    }
+
 }

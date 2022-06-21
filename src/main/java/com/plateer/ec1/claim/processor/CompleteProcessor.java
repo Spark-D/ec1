@@ -45,6 +45,7 @@ public class CompleteProcessor extends ClaimProcessor {
             updateDataTarget = claimDataCreator.makeUpdateData(dto);
             claimDataCreator.saveClaimData(null, updateDataTarget);
             ifCallHelper.callPaymentIF();
+            verifyAmount();
         }catch (Exception e){
             log.error("AcceptWithdrawalProcess error occur  : {}", e);
         }finally {

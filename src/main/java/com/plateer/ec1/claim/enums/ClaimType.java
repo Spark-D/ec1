@@ -1,10 +1,7 @@
 package com.plateer.ec1.claim.enums;
 
-import com.plateer.ec1.claim.dto.ClaimDto;
-import com.plateer.ec1.claim.processor.ClaimProcessor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.jni.Proc;
 
 import java.util.Arrays;
 import java.util.List;

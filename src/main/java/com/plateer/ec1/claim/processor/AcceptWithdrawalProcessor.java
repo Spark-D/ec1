@@ -41,7 +41,7 @@ public class AcceptWithdrawalProcessor extends ClaimProcessor {
             createDataTarget = claimDataCreator.makeCreateData(dto);
             updateDataTarget = claimDataCreator.makeUpdateData(dto);
             claimDataCreator.saveClaimData(createDataTarget, updateDataTarget);
-
+            verifyAmount();
         }catch (Exception e){
              log.error("AcceptWithdrawalProcess error occur  : {}", e);
         }finally {
