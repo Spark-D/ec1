@@ -2,8 +2,6 @@ package com.plateer.ec1.claim.factory;
 
 import com.plateer.ec1.claim.creator.ClaimDataCreator;
 import com.plateer.ec1.claim.enums.ClaimType;
-import com.plateer.ec1.claim.enums.ProcessorType;
-import com.plateer.ec1.claim.processor.ClaimProcessor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

@@ -1,15 +1,13 @@
 package com.plateer.ec1.claim.factory;
 
-import com.plateer.ec1.claim.enums.ClaimType;
-import com.plateer.ec1.claim.enums.ProcessorType;
 import com.plateer.ec1.claim.enums.ValidatorType;
 import com.plateer.ec1.claim.validator.ClaimValidator;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ValidatorFactory {
