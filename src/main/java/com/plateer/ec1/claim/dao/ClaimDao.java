@@ -1,8 +1,8 @@
 package com.plateer.ec1.claim.dao;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface ClaimDao {
-
+    Integer selectTest();
 }

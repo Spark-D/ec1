@@ -1,5 +1,6 @@
 package com.plateer.ec1.claim.service;
 
+import com.plateer.ec1.claim.dao.ClaimDao;
 import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.enums.ClaimType;
 import com.plateer.ec1.claim.factory.ProcessorFactory;
@@ -12,9 +13,14 @@ import org.springframework.stereotype.Service;
 public class ClaimService {
 
     private final ProcessorFactory factory;
+    private final ClaimDao dao;
 
     public void claim(ClaimDto claimDto){
         ClaimProcessor claimProcessor = factory.getProcessor(claimDto);
         claimProcessor.doProcess(claimDto);
+    }
+
+    public void dbTest() {
+        dao.selectTest();
     }
 }

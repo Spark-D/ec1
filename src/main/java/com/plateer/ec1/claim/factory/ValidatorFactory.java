@@ -12,14 +12,8 @@ import java.util.Map;
 @Component
 public class ValidatorFactory {
     private Map<ValidatorType, ClaimValidator> validatorMap = new LinkedHashMap<>();
-    private List<ClaimValidator> validators;
 
     public ValidatorFactory(List<ClaimValidator> validators) {
-        this.validators = validators;
-    }
-
-    @PostConstruct
-    void init() {
         validators.stream()
                 .forEach(v -> validatorMap.put(v.getType(), v));
     }

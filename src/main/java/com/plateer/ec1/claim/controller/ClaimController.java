@@ -1,10 +1,12 @@
 package com.plateer.ec1.claim.controller;
 
+import com.plateer.ec1.claim.dao.ClaimDao;
 import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.service.ClaimService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,12 @@ public class ClaimController {
     @PostMapping("claim")
     public ResponseEntity<String> claim(@RequestBody ClaimDto claimDto) {
         claimService.claim(claimDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("test")
+    public ResponseEntity<String> test(){
+        claimService.dbTest();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

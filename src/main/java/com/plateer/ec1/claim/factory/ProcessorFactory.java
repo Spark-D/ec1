@@ -7,6 +7,7 @@ import com.plateer.ec1.claim.processor.ClaimProcessor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
@@ -15,14 +16,8 @@ import java.util.List;
 public class ProcessorFactory {
 
     Map<ProcessorType, ClaimProcessor> processorMap = new LinkedHashMap<>();
-    List<ClaimProcessor> processors;
 
     public ProcessorFactory(List<ClaimProcessor> processors) {
-        this.processors = processors;
-    }
-
-    @PostConstruct
-    void init() {
         processors.stream()
                 .forEach(p -> processorMap.put(p.getType(),  p));
     }
