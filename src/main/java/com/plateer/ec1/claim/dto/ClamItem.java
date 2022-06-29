@@ -5,9 +5,11 @@ import lombok.Data;
 @Data
 public class ClamItem {
 
-    private Long ordSeq;
-    private Long procSeq;
-    private String pdNo;
-    private String itemNo;
-
+    private Integer ordSeq;
+    private Integer procSeq;
+    private String ordGoodsNo;
+    private String ordItemNo;
+    private Integer ordCnt;
+    private Integer cnclCnt;
+    private Integer rtgsCnt;
 }

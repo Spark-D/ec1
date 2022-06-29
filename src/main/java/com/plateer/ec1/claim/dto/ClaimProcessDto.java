@@ -1,9 +1,9 @@
 package com.plateer.ec1.claim.dto;
 
-import com.plateer.ec1.claim.model.OrderBenefit;
-import com.plateer.ec1.claim.model.OrderBenefitRelation;
-import com.plateer.ec1.claim.model.OrderClaim;
-import com.plateer.ec1.claim.model.OrderCost;
+import com.plateer.ec1.common.model.order.OpClmInfo;
+import com.plateer.ec1.common.model.order.OpOrdBnfInfo;
+import com.plateer.ec1.common.model.order.OpOrdBnfRelInfo;
+import com.plateer.ec1.common.model.order.OpOrdCostInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -12,11 +12,11 @@ import java.util.List;
 public class ClaimProcessDto {
 
     private String clmNo;
-    private Long trNo;
+    private Long procSeq;
 
-    private List<OrderClaim> orderClaimList;
-    private List<OrderCost> orderCostList;
-    private List<OrderBenefitRelation> orderBenefitRelationList;
-    private List<OrderBenefit> orderBenefits;
+    private List<OpClmInfo> orderClaimList;
+    private List<OpOrdCostInfo> orderCostList;
+    private List<OpOrdBnfRelInfo> orderBenefitRelationList;
+    private List<OpOrdBnfInfo> orderBenefits;
 
 }
