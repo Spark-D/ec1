@@ -1,11 +1,9 @@
 package com.plateer.ec1.payment.dto;
 
 import com.plateer.ec1.payment.enums.PaymentType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class PayInfo {
+public class PayApproveResponse {
+
     private PaymentType paymentType;
+    private String ablePartialCancelYn;
 }

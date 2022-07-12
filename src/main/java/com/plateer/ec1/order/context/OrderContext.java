@@ -8,6 +8,8 @@ import com.plateer.ec1.order.enums.OrderValidator;
 import com.plateer.ec1.order.repository.OrderRepository;
 import com.plateer.ec1.order.strategy.AfterStrategy;
 import com.plateer.ec1.order.strategy.DataStrategy;
+import com.plateer.ec1.payment.dto.OrderInfo;
+import com.plateer.ec1.payment.dto.PaymentRequest;
 import com.plateer.ec1.payment.service.PaymentService;
 
 import java.util.Arrays;
@@ -32,7 +34,7 @@ public class OrderContext {
             OrderValidator.get(request).test(new OrderValidationDto(request, Arrays.asList()));
             orderDto = dataStrategy.create(request);
             orderRepository.insertOrderData(orderDto);
-            paymentService.approve(request.getPayInfo());
+            paymentService.approve(new PaymentRequest());
             amountVerify(request.getOrderNo());
             afterStrategy.call();
 
